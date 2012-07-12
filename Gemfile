@@ -8,8 +8,7 @@ gem 'rails', '3.2.6'
 
 platforms :jruby do
   # gem 'activerecord-jdbc-adapter', :require => false
-  gem 'neo4j'
-  gem 'devise-neo4j'
+  gem 'neo4j', "~> 2.0"
 end
 
 # Gems used only for assets and not required
