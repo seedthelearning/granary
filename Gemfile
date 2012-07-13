@@ -26,9 +26,11 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem "rack-test", require: "rack/test"
 end
 
 gem 'jquery-rails'
+gem 'jbuilder'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
