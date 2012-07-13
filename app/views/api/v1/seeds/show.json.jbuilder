@@ -1,2 +1,1 @@
-json.id @seed.id
-json.link @seed.link
+json.partial! @seed

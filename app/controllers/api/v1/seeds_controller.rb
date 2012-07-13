@@ -11,4 +11,8 @@ class Api::V1::SeedsController < ApplicationController
       render :json => {"error" => "Seed not found"}, :status => :not_found
     end
   end
+
+  def index
+    @seeds = Seed.all
+  end
 end

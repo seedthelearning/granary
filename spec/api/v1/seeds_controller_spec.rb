@@ -70,4 +70,31 @@ describe "/api/v1/seeds", :type => :api do
       end
     end
   end
+
+  describe "#index" do
+    context "there are items" do
+      let(:seeds) { [ FactoryGirl.build(:seed, :link => "http://link1.com"),
+                      FactoryGirl.build(:seed, :link => "http://link2.com"),
+                      FactoryGirl.build(:seed, :link => "http://link3.com")] }
+      before(:each) do
+        Seed.stub(:all).and_return(seeds)
+      end
+
+      it "returns the expected list of items with links" do
+        get "api/v1/seeds.json"
+        json_response = JSON.parse(last_response.body)
+        json_response[0]["link"].should eq("http://link1.com")
+        json_response[1]["link"].should eq("http://link2.com")
+        json_response[2]["link"].should eq("http://link3.com")
+      end
+
+      it "returns the expected list of items with ids"
+    end
+
+    context "there are no items" do
+      it "returns an empty list"
+    end
+
+    # ALSO: TEST CREATING SEEDS WITH DONATIONS
+  end
 end
