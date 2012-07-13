@@ -17,7 +17,7 @@ describe "/api/v1/seeds", :type => :api do
 
           post "api/v1/seeds.json", :body => {:link => link}
           json_response = JSON.parse(last_response.body)
-          json_response["seed"]["link"].should eq(link)
+          json_response["link"].should eq(link)
         end
       end
 
@@ -56,7 +56,19 @@ describe "/api/v1/seeds", :type => :api do
     end
 
     context "seed does not exist" do
+      it "returns a 404 not found" do
+        Seed.stub(:find).with("1").and_return(nil)
 
+        get "api/v1/seeds/1.json"
+        last_response.status.should eq(404)
+      end
+      it "returns an error message" do
+        Seed.stub(:find).with("1").and_return(nil)
+
+        get "api/v1/seeds/1.json"
+        json_response = JSON.parse(last_response.body)
+        json_response["error"].should eq("Seed not found")
+      end
     end
   end
 end
