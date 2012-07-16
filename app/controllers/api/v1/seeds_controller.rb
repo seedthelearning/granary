@@ -14,5 +14,8 @@ class Api::V1::SeedsController < ApplicationController
 
   def index
     @seeds = Seed.all
+    unless @seeds
+      render :json => []
+    end
   end
 end

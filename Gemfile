@@ -27,6 +27,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem "rack-test", require: "rack/test"
+  gem 'guard'
+  gem 'guard-jruby-rspec'
 end
 
 gem 'jquery-rails'
