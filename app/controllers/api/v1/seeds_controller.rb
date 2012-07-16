@@ -1,7 +1,9 @@
 class Api::V1::SeedsController < ApplicationController
 
   def create
-    @seed = Seed.create(:link => params[:body][:link])
+    link = params[:body][:link]
+    cents = params[:body][:amount_cents]
+    @seed = Seed.plant(link, cents)
     render "create", :status => :created
   end
 
