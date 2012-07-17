@@ -4,12 +4,11 @@ class Seed < Neo4j::Rails::Model
 	property  :updated_at
 
 	has_one(:pledge)
-	# has_n(:helpers) JQTODO: We may not need this connection
-	has_n(:reseeds)
+	has_n(:helpers).to(Participant)
+	has_n(:reseeds).to(Seed)
 
 	index :link
 
-  # call this plant
 	def self.plant(amount_cents)
 		unique_url = generate_link
 		seed = Seed.create(:link => unique_url)
@@ -18,16 +17,16 @@ class Seed < Neo4j::Rails::Model
 		seed
 	end
 
-	# call this reseed
 	def self.reseed(link, amount_cents)
 		child = plant(amount_cents)
 		parent_seed = Seed.find(:link => link)
 		parent_seed.reseeds << child
 	end
 
-private
+	# These likely belong elsewhere.
 	def self.generate_link
 		Digest::MD5.hexdigest(Time.now.to_s)
+		# JQTODO: Add another criteria to save against race conditions.
 	end
 
 	def self.create_donation(amount_cents)

@@ -1,3 +1,5 @@
+
+
 require 'spec_helper'
 
 describe "/api/v1/seeds", :type => :api do
@@ -9,7 +11,7 @@ describe "/api/v1/seeds", :type => :api do
       let(:donation) { double(:donation, amount_cents: amount, payout_cents: 100) }
       before(:each) do
         seed = double(:seed, :id => 1, :link => link)
-        Seed.stub(:plant).with(amount.to_s).and_return(seed)
+        Seed.stub(:plant).and_return(seed)
         seed.stub(:pledge).and_return(donation)
         post "api/v1/seeds.json", :body => { :amount_cents => amount }
       end
@@ -41,7 +43,7 @@ describe "/api/v1/seeds", :type => :api do
       let(:donation) { double(:donation, amount_cents: amount, payout_cents: 100) }
       before(:each) do
         seed = double(:seed, :id => 1, :link => link)
-        Seed.stub(:reseed).with(link, amount.to_s).and_return(seed)
+        Seed.stub(:reseed).and_return(seed)
         seed.stub(:pledge).and_return(donation)
         post "api/v1/seeds.json", :body => { :link => link, :amount_cents => amount }
       end
@@ -71,7 +73,7 @@ describe "/api/v1/seeds", :type => :api do
         let(:seed) { FactoryGirl.build(:seed, :link => "http://testtwo.com") }
 
         before(:each) do
-          Seed.stub(:find).with("1").and_return(seed)
+          Seed.stub(:find).and_return(seed)
           seed.stub(:id).and_return(1)
           get url
         end
@@ -89,7 +91,7 @@ describe "/api/v1/seeds", :type => :api do
 
       context "seed does not exist" do
         before(:each) do
-          Seed.stub(:find).with("1").and_return(nil)
+          Seed.stub(:find).and_return(nil)
           get url
         end
 
@@ -109,7 +111,7 @@ describe "/api/v1/seeds", :type => :api do
       let(:seed) { FactoryGirl.build(:seed, :link => "http://testtwo.com") }
 
       before(:each) do
-        Seed.stub(:find).with("1").and_return(seed)
+        Seed.stub(:find).and_return(seed)
         seed.stub(:id).and_return(1)
         seed.stub(:pledge).and_return(donation)
         get url

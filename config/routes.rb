@@ -2,7 +2,7 @@ Neo4jrails::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :seeds
-      resources :donations
+      resources :participants
     end
   end
 
