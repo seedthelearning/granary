@@ -10,7 +10,7 @@ class Seed < Neo4j::Rails::Model
 	index :link
 
   # call this plant
-	def self.create_seed(amount_cents)
+	def self.plant(amount_cents)
 		unique_url = generate_link
 		seed = Seed.create(:link => unique_url)
 		donation = create_donation(amount_cents)
@@ -19,8 +19,8 @@ class Seed < Neo4j::Rails::Model
 	end
 
 	# call this reseed
-	def self.plant(link, amount_cents)
-		child = create_seed(amount_cents)
+	def self.reseed(link, amount_cents)
+		child = plant(amount_cents)
 		parent_seed = Seed.find(:link => link)
 		parent_seed.reseeds << child
 	end

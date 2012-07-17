@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Seed" do
-  describe "#plant" do
+  describe "#reseed" do
     let(:link) { "http://foo.com" }
 
     context "given donation information" do
@@ -10,17 +10,17 @@ describe "Seed" do
         child = double(:seed)
         reseeds = double(:reseeds)
         
-        Seed.stub(:create_seed).with(10000).and_return(child)
+        Seed.stub(:plant).with(10000).and_return(child)
         Seed.stub(:find).with(:link => link).and_return(parent)
         
         parent.should_receive(:reseeds).and_return(reseeds)
         reseeds.should_receive(:<<).with(child)                                    
-        Seed.plant(link, 10000)
+        Seed.reseed(link, 10000)
       end
     end
   end
 
-  describe "#create_seed" do
+  describe "#plant" do
     let(:link) { "http://foo.com" }
     let(:amount) { 10000 }
 
@@ -31,7 +31,7 @@ describe "Seed" do
       Seed.stub(:create).with(:link => link).and_return(seed)
       Seed.stub(:create_donation).with(amount).and_return(donation)
       seed.should_receive(:pledge=).with(donation)
-      Seed.create_seed(amount)
+      Seed.plant(amount)
     end
 
   end

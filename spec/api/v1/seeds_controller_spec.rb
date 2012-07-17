@@ -3,61 +3,62 @@ require 'spec_helper'
 describe "/api/v1/seeds", :type => :api do
 
   describe "#create" do
-    context "seed without a donation" do
-      context "seed doesn't exist" do
-        let(:link) { "http//foo.com" }
-
-        before(:each) do
-          seed = double(:seed, :link => link, :id => 1, :pledge => nil)
-          Seed.stub(:plant).with(link, nil).and_return(seed)
-          post "api/v1/seeds.json", :body => { :link => link }
-        end
-
-        it "returns a 201 Created" do
-          last_response.status.should == 201
-        end
-
-        it "returns a json response with the created seed" do
-          json_response = JSON.parse(last_response.body)
-          json_response["link"].should eq(link)
-        end
-
-        it "returns a seed with an id" do
-          json_response = JSON.parse(last_response.body)
-          json_response["id"].should eq(1)
-        end
-      end
-    end
-
-    context "seed with a donation" do
+    context "new seed" do
+      let(:amount) { 10000 }
       let(:link) { "http://foo.com" }
-
+      let(:donation) { double(:donation, amount_cents: amount, payout_cents: 100) }
       before(:each) do
-        seed = double(:seed, :link => link, :id => 1)
-        donation = double(:donation, :amount_cents => 10000, :payout_cents => 100)
-        Seed.stub(:plant).with(link, "10000").and_return(seed)
+        seed = double(:seed, :id => 1, :link => link)
+        Seed.stub(:plant).with(amount.to_s).and_return(seed)
         seed.stub(:pledge).and_return(donation)
-        post "api/v1/seeds.json", :body => { :link => link, :amount_cents => 10000 }
+        post "api/v1/seeds.json", :body => { :amount_cents => amount }
       end
 
-      it "returns a 200 OK" do
+      it "returns a 201 Created" do
         last_response.status.should == 201
       end
 
-      it "returns a json response with the created seed" do
+      it "returns a json response with a seed" do
         json_response = JSON.parse(last_response.body)
         json_response["link"].should eq(link)
-      end
-
-      it "returns a json response with the created donation" do
-        json_response = JSON.parse(last_response.body)
-        json_response["donation"]["amount_cents"].should eq(10000)
-        json_response["donation"]["payout_cents"].should eq(100)
       end
 
       it "returns a seed with an id" do
         json_response = JSON.parse(last_response.body)
         json_response["id"].should eq(1)
+      end
+
+      it "returns a seed with a donation" do
+        json_response = JSON.parse(last_response.body)
+        json_response["donation"]["amount_cents"].should eq(10000)
+        json_response["donation"]["payout_cents"].should eq(100)
+      end
+    end
+
+    context "reseed" do
+      let(:amount) { 10000 }
+      let(:link) { "http://foo.com" }
+      let(:donation) { double(:donation, amount_cents: amount, payout_cents: 100) }
+      before(:each) do
+        seed = double(:seed, :id => 1, :link => link)
+        Seed.stub(:reseed).with(link, amount.to_s).and_return(seed)
+        seed.stub(:pledge).and_return(donation)
+        post "api/v1/seeds.json", :body => { :link => link, :amount_cents => amount }
+      end
+
+      it "returns a 201 Created" do
+        last_response.status.should == 201
+      end
+
+      it "returns a seed with an id" do
+        json_response = JSON.parse(last_response.body)
+        json_response["id"].should eq(1)
+      end
+
+      it "returns a seed with a donation" do
+        json_response = JSON.parse(last_response.body)
+        json_response["donation"]["amount_cents"].should eq(10000)
+        json_response["donation"]["payout_cents"].should eq(100)
       end
     end
   end
