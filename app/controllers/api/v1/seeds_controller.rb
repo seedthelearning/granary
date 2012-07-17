@@ -2,6 +2,12 @@ class Api::V1::SeedsController < ApplicationController
 
   def create
     link = params[:body][:link]
+    if link
+      # create reseed
+    else
+      # create new seed
+    end
+    
     cents = params[:body][:amount_cents]
     @seed = Seed.plant(link, cents)
     render "create", :status => :created
