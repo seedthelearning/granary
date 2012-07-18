@@ -3,6 +3,9 @@ require 'spec_helper'
 describe "/api/v1/trees", :type => :api do
 	describe "#show" do
     context "seed has no children" do
+      it "returns a json seed" do
+
+      end
       it "returns json with no children" do
         seed = double(:seed, :id => 1, :link => "http://foo.com", :reseeds => [])
         Seed.stub(:find).and_return(seed)
@@ -13,7 +16,14 @@ describe "/api/v1/trees", :type => :api do
     end
 
     context "seed has children" do
-      it "returns json with children"
+      it "returns json with children" do
+        seed_two = double(:seed, :id => 2, :link => "http://foo2.com", :reseeds => [])
+        seed = double(:seed, :id => 1, :link => "http://foo.com", :reseeds => [seed_two])
+        Seed.stub(:find).and_return(seed)
+        get "api/v1/trees/1.json"
+        response = JSON.parse(last_response.body)
+        response["children"].first["id"].should eq(2)
+      end
     end
 
     context "seed has grandchildren" do
