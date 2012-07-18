@@ -3,6 +3,7 @@ Neo4jrails::Application.routes.draw do
     namespace :v1 do
       resources :seeds
       resources :participants
+      resources :trees
     end
   end
 
