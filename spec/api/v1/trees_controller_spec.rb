@@ -53,4 +53,10 @@ end
 # { id: 1, link: foo.com, type: seed,
 #           children: [ { id: 2, link: foo, type: seed }, { id: 2, link: foo, type: seed }, { id: 3, type: participant } ]
 # }
+
+# { id: 1, link: foo.com, type: seed,
+#   reseeds: [ { id: 2, link: foo, origin: 1}, 
+#              { id: 3, link: foo, origin: 2 } ]
+#   participants: [ { id: 10, origin: 2}, { id: 11, origin: 2} ]
+# }
  
