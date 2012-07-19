@@ -1,0 +1,26 @@
+---
+  port: 8080
+  http: # http://tomcat.apache.org/tomcat-6.0-doc/config/http.html#Attributes
+    address: localhost # binding to 127.0.0.1 is a good idea
+    #acceptCount: 400 # default 100 @see apache conf MaxClients
+    #connectionTimeout: 30000 # default 60 seconds @see apache conf ProxyTimeout
+    #keepAliveTimeout: 4000 # set @in apache conf KeepAliveTimeout
+    #maxKeepAliveRequests: 1 # 160 # set @in apache conf MaxKeepAliveRequests
+    #maxPostSize: 4194304 # 4 megabytes
+    #bufferSize: 8192 # default 4096
+    #tcpNoDelay: true
+    #socketBuffer: 10000
+  # pass as a command line argument e.g. -e production
+  #environment: production
+  jruby_min_runtimes: 1 # min number of runtimes
+  jruby_max_runtimes: 1 # max number of runtimes
+  context_path: / # default context path
+  extensions:
+    #logging:
+    #  config: config/trinidad-logging.properties
+    daemon:
+      pid_file: "/home/deployer/app/shared/pids/trinidad.pid"
+      jvm_args: "-server -Djruby.compile.mode=FORCE -XX:MaxPermSize=256m -Xmx512m"
+      #log: # daemon log properties
+        #file: log/trinidad.log # where the daemon writes its output
+        #level: ALL # severity level, it cn be one of these: ALL, CONFIG, FINE, FINER, FINEST, INFO, OFF, SEVERE, WARNING
