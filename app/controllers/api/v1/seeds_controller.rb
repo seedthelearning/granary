@@ -1,9 +1,9 @@
 class Api::V1::SeedsController < ApplicationController
 
   def create
-    link = params[:body][:link]
-    cents = params[:body][:amount_cents]
-    user_id = params[:body][:user_id]
+    link = params[:link]
+    cents = params[:amount_cents]
+    user_id = params[:user_id]
     if link
       @seed = Seed.reseed(user_id, link, cents)
     else
