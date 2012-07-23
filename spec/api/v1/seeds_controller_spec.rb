@@ -10,7 +10,7 @@ describe "/api/v1/seeds", :type => :api do
       let(:link) { "http://foo.com" }
       let(:donation) { double(:donation, amount_cents: amount, payout_cents: 100) }
       before(:each) do
-        seed = double(:seed, :id => 1, :link => link)
+        seed = double(:seed, :id => 1, :link => link, :user_id => 100)
         Seed.stub(:plant).and_return(seed)
         seed.stub(:pledge).and_return(donation)
         post "api/v1/seeds.json", :body => { :amount_cents => amount }
@@ -35,6 +35,11 @@ describe "/api/v1/seeds", :type => :api do
         json_response["donation"]["amount_cents"].should eq(10000)
         json_response["donation"]["payout_cents"].should eq(100)
       end
+
+      it "returns a seed with a user id" do
+        json_response = JSON.parse(last_response.body)
+        json_response["user_id"].should eq(100)
+      end
     end
 
     context "reseed" do
@@ -42,7 +47,7 @@ describe "/api/v1/seeds", :type => :api do
       let(:link) { "http://foo.com" }
       let(:donation) { double(:donation, amount_cents: amount, payout_cents: 100) }
       before(:each) do
-        seed = double(:seed, :id => 1, :link => link)
+        seed = double(:seed, :id => 1, :link => link, :user_id => 100)
         Seed.stub(:reseed).and_return(seed)
         seed.stub(:pledge).and_return(donation)
         post "api/v1/seeds.json", :body => { :link => link, :amount_cents => amount }
@@ -61,6 +66,11 @@ describe "/api/v1/seeds", :type => :api do
         json_response = JSON.parse(last_response.body)
         json_response["donation"]["amount_cents"].should eq(10000)
         json_response["donation"]["payout_cents"].should eq(100)
+      end
+
+      it "returns a seed with a user id" do
+        json_response = JSON.parse(last_response.body)
+        json_response["user_id"].should eq(100)
       end
     end
   end

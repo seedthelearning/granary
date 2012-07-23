@@ -4,4 +4,5 @@ json.donation do |json|
 end
 json.id @seed.id
 json.link @seed.link
+json.user_id @seed.user_id
 json.status :ok
