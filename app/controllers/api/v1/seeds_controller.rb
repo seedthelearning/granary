@@ -3,10 +3,11 @@ class Api::V1::SeedsController < ApplicationController
   def create
     link = params[:body][:link]
     cents = params[:body][:amount_cents]
+    user_id = params[:body][:user_id]
     if link
-      @seed = Seed.reseed(link, cents)
+      @seed = Seed.reseed(user_id, link, cents)
     else
-      @seed = Seed.plant(cents)
+      @seed = Seed.plant(user_id, cents)
     end
     render "create", :status => :created
   end

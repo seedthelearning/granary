@@ -1,6 +1,7 @@
 class Participant < Neo4j::Rails::Model
   property :created_at
   property :updated_at
+  property :user_id
 
   has_one(:origin)
   

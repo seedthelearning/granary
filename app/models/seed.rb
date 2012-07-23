@@ -2,6 +2,7 @@ class Seed < Neo4j::Rails::Model
   property  :link
   property  :created_at
   property  :updated_at
+  property  :user_id
 
   has_one(:pledge)
   has_n(:helpers).to(Participant)
@@ -47,17 +48,17 @@ class Seed < Neo4j::Rails::Model
     tree_hash
   end
 
-  def self.plant(amount_cents)
+  def self.plant(user_id, amount_cents)
     unique_url = generate_link
-    seed = Seed.create(:link => unique_url)
+    seed = Seed.create(:user_id => user_id, :link => unique_url)
     donation = create_donation(amount_cents)
     seed.pledge = donation
     seed.save
     seed
   end
 
-  def self.reseed(link, amount_cents)
-    child = plant(amount_cents)
+  def self.reseed(user_id, link, amount_cents)
+    child = plant(user_id, amount_cents)
     parent_seed = Seed.find(:link => link)
     parent_seed.outgoing(:reseeds) << child
     parent_seed.save
