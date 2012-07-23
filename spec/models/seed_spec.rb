@@ -13,8 +13,9 @@ describe "Seed" do
         Seed.stub(:plant).with(10000).and_return(child)
         Seed.stub(:find).with(:link => link).and_return(parent)
         
-        parent.should_receive(:reseeds).and_return(reseeds)
+        parent.stub(:outgoing).and_return(reseeds)
         reseeds.should_receive(:<<).with(child)                                    
+        parent.should_receive(:save)     
         Seed.reseed(link, 10000)
       end
     end
@@ -31,6 +32,7 @@ describe "Seed" do
       Seed.stub(:create).with(:link => link).and_return(seed)
       Seed.stub(:create_donation).with(amount).and_return(donation)
       seed.should_receive(:pledge=).with(donation)
+      seed.should_receive(:save)
       Seed.plant(amount)
     end
 

@@ -10,10 +10,11 @@ class Participant < Neo4j::Rails::Model
 
   def self.create_with_origin(origin)
     participant = Participant.create
+    participant = origin.helpers.create
+    participant.origin = origin
+
     origin.outgoing(:helpers) << participant
     origin.save
-    #participant = origin.helpers.create
-    #participant.origin = origin
     participant
   end
 end
