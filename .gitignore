@@ -13,4 +13,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-db/neo4j*
+db/neo*
+db/active_tx_log
+db/index.db
+db/index/
+db/lock
+db/messages.log
+db/nioneo_logical.log.2
+db/nioneo_logical.log.active
+db/tm_tx_log.1

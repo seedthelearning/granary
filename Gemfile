@@ -4,6 +4,7 @@ gem 'rails', '3.2.6'
 gem 'jquery-rails'
 gem 'jbuilder'
 
+gem 'pacer-neo4j'
 platforms :jruby do
   # gem 'activerecord-jdbc-adapter', :require => false
   gem 'trinidad'
