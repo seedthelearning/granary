@@ -14,13 +14,17 @@ class Seed < Neo4j::Rails::Model
     seed = Seed.create(:link => unique_url)
     donation = create_donation(amount_cents)
     seed.pledge = donation
+    seed.save
     seed
   end
 
   def self.reseed(link, amount_cents)
     child = plant(amount_cents)
     parent_seed = Seed.find(:link => link)
-    parent_seed.reseeds << child
+    #parent_seed.reseeds << child
+    parent_seed.outgoing(:reseeds) << child
+    parent_seed.save
+    parent_seed
   end
 
   # These likely belong elsewhere.

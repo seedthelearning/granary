@@ -5,7 +5,7 @@ class Api::V1::ParticipantsController < ApplicationController
     origin = Seed.find(:link => link)
     
     if origin
-      @participant = Participant.create_with_origin(origin)
+      @participant = Participant:create_with_origin(origin)
       render "create", :status => :created
     else
       render :json => {"error" => "No seed provided"}, :status => :bad_request

@@ -31,12 +31,6 @@ GEM
     arel (3.0.2)
     blankslate (2.1.2.4)
     builder (3.0.0)
-    capistrano (2.12.0)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -53,7 +47,6 @@ GEM
     factory_girl_rails (3.5.0)
       factory_girl (~> 3.5.0)
       railties (>= 3.0.0)
-    fastercsv (1.5.5)
     ffi (1.0.11)
     ffi (1.0.11-java)
     guard (1.2.3)
@@ -64,7 +57,6 @@ GEM
       guard-rspec (>= 0.7.3)
     guard-rspec (1.2.0)
       guard (>= 1.1)
-    highline (1.6.13)
     hike (1.2.1)
     i18n (0.6.0)
     jbuilder (0.4.0)
@@ -97,18 +89,7 @@ GEM
       neo4j-community (>= 1.7.0)
     neo4j-wrapper (2.0.1-java)
       neo4j-core (= 2.0.1)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
-    net-sftp (2.0.5)
-      net-ssh (>= 2.0.9)
-    net-ssh (2.5.2)
-    net-ssh-gateway (1.1.0)
-      net-ssh (>= 1.99.1)
     orm_adapter (0.4.0)
-    pacer (0.9.1.1-java)
-      fastercsv (>= 1.5.4)
-    pacer-neo4j (1.1.1-java)
-      pacer (>= 0.9.1.1)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -181,7 +162,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano
   coffee-rails (~> 3.2.1)
   factory_girl_rails
   guard
@@ -189,7 +169,6 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   neo4j (~> 2.0)
-  pacer-neo4j
   rack-test
   rails (= 3.2.6)
   rspec-rails
