@@ -14,7 +14,7 @@ class Seed < Neo4j::Rails::Model
     start = id.to_i
     tree_hash = { start => { :children => {}, :payout_cents => pledge.payout_cents, 
                              :amount_cents => pledge.amount_cents,
-                             :link => link} }
+                             :link => link, :children_count => children_count }}
 
     outgoing(:reseeds).outgoing(:helpers).depth(:all).include_start_node.raw.paths.depth_first(:pre).each do |path|
       path_nodes = path.nodes.to_a
@@ -47,6 +47,10 @@ class Seed < Neo4j::Rails::Model
     end
     tree_hash
   end
+   
+  def children_count
+    outgoing(:reseeds).outgoing(:helpers).depth(:all).count
+  end
 
   def self.plant(user_id, amount_cents)
     unique_url = generate_link
@@ -74,4 +78,6 @@ class Seed < Neo4j::Rails::Model
     donation = Donation.create(:amount_cents => amount_cents,
                                :payout_cents => 100)
   end
+
+private
 end
