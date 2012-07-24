@@ -6,3 +6,5 @@ if seed.pledge
 end
 json.id seed.id
 json.link seed.link
+json.child_count seed.children_count
+json.total_donated seed.total_donated
