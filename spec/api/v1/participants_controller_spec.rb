@@ -8,9 +8,9 @@ describe "/api/v1/participants", :type => :api do
 
       before(:each) do
         url = "api/v1/participants.json"
-        seed = double(:seed, :link => link, :id => 1)
+        seed = double(:seed, :link => link, :id => 1, :user_id => 111)
         Seed.stub(:find).and_return(seed)
-        participant = double(:participant)
+        participant = double(:participant, :user_id => 111)
         Participant.stub(:create_with_origin).and_return(participant)
         participant.stub(:origin_link).and_return(link)
         
@@ -24,6 +24,11 @@ describe "/api/v1/participants", :type => :api do
       it "creates a participant" do
         json_response = JSON.parse(last_response.body)
         json_response["parent_seed_url"].should eq(link)
+      end
+
+      it "includes the user id" do
+        json_response = JSON.parse(last_response.body)
+        json_response["user_id"].should eq(111)
       end
     end
 

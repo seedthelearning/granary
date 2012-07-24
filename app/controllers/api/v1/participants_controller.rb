@@ -1,11 +1,12 @@
 class Api::V1::ParticipantsController < ApplicationController
 
 	def create
-    link = params["body"]["link"]
+    link = params[:link]
     origin = Seed.find(:link => link)
+    user_id = params[:user_id]
     
     if origin
-      @participant = Participant.create_with_origin(origin)
+      @participant = Participant.create_with_origin(origin, user_id)
       render "create", :status => :created
     else
       render :json => {"error" => "No seed provided"}, :status => :bad_request

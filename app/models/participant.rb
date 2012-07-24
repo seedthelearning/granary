@@ -9,8 +9,8 @@ class Participant < Neo4j::Rails::Model
   	origin.link
   end
 
-  def self.create_with_origin(origin)
-    participant = Participant.create
+  def self.create_with_origin(origin, user_id)
+    participant = Participant.create(:user_id => user_id)
     participant = origin.helpers.create
     participant.origin = origin
 

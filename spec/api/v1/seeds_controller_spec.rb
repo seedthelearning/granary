@@ -50,7 +50,7 @@ describe "/api/v1/seeds", :type => :api do
         seed = double(:seed, :id => 1, :link => link, :user_id => 100)
         Seed.stub(:reseed).and_return(seed)
         seed.stub(:pledge).and_return(donation)
-        post "api/v1/seeds.json", :body => { :link => link, :amount_cents => amount }
+        post "api/v1/seeds.json", { :link => link, :amount_cents => amount }
       end
 
       it "returns a 201 Created" do
