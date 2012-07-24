@@ -67,8 +67,7 @@ class Seed < Neo4j::Rails::Model
 
   # These likely belong elsewhere.
   def self.generate_link
-    Digest::MD5.hexdigest(Time.now.to_s)
-    # JQTODO: Add another criteria to save against race conditions.
+    Digest::MD5.hexdigest("#{Time.now.usec} + #{rand(42)}")
   end
 
   def self.create_donation(amount_cents)
