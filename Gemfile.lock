@@ -47,7 +47,6 @@ GEM
     factory_girl_rails (3.5.0)
       factory_girl (~> 3.5.0)
       railties (>= 3.0.0)
-    ffi (1.1.0)
     ffi (1.1.0-java)
     guard (1.2.3)
       listen (>= 0.4.2)
@@ -70,7 +69,6 @@ GEM
       thor (~> 0.14)
     jruby-jars (1.6.7.2)
     jruby-rack (1.1.7)
-    json (1.7.3)
     json (1.7.3-java)
     listen (0.4.7)
       rb-fchange (~> 0.0.5)
@@ -168,7 +166,6 @@ GEM
 
 PLATFORMS
   java
-  ruby
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
