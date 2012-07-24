@@ -67,7 +67,7 @@ class Seed < Neo4j::Rails::Model
 
   # These likely belong elsewhere.
   def self.generate_link
-    Digest::MD5.hexdigest(Time.now.usec + rand(42))
+    Digest::MD5.hexdigest("#{Time.now.usec} + #{rand(42)}")
   end
 
   def self.create_donation(amount_cents)
