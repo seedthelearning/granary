@@ -1,7 +1,7 @@
 class Api::V1::TreesController < ApplicationController
 
   def show
-    @seed = Seed.find(:id => params["id"])
+    @seed = Seed.find(:link => params["id"])
     if @seed
       render :json => @seed.tree, :status => :ok
     else
