@@ -12,9 +12,12 @@ class Seed < Neo4j::Rails::Model
 
   def tree
     start = id.to_i
+    child_count = children_count
+    total_donated = pledge.payout_cents * child_count
     tree_hash = { start => { :children => {}, :payout_cents => pledge.payout_cents, 
                              :amount_cents => pledge.amount_cents,
-                             :link => link, :children_count => children_count }}
+                             :link => link, :children_count => child_count, 
+                             :total_donated => total_donated }}
 
     outgoing(:reseeds).outgoing(:helpers).depth(:all).include_start_node.raw.paths.depth_first(:pre).each do |path|
       path_nodes = path.nodes.to_a
