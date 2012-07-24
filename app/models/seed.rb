@@ -15,7 +15,8 @@ class Seed < Neo4j::Rails::Model
     tree_hash = { start => { :children => {}, :payout_cents => pledge.payout_cents, 
                              :amount_cents => pledge.amount_cents,
                              :link => link, :children_count => children_count, 
-                             :total_donated => total_donated }}
+                             :total_donated => total_donated,
+                             :user_id => user_id }}
 
     outgoing(:reseeds).outgoing(:helpers).depth(:all).include_start_node.raw.paths.depth_first(:pre).each do |path|
       path_nodes = path.nodes.to_a
@@ -32,6 +33,7 @@ class Seed < Neo4j::Rails::Model
             rel_type = path.last_relationship.rel_type
             new_hash[:type] = rel_type
             new_hash[:id] = node.id
+            new_hash[:user_id] = node[:user_id]
 
             if rel_type == :reseeds
               seed = Seed.find(node.id)
@@ -56,6 +58,15 @@ class Seed < Neo4j::Rails::Model
 
   def total_donated
     children_count * pledge.payout_cents
+  end
+
+  def helper?(user_id)
+    outgoing(:helpers).depth(:all).raw.paths.depth_first(:pre).each do |path|
+      if path.end_node[:user_id] == user_id
+        return true
+      end
+    end
+    false
   end
 
   def self.plant(user_id, amount_cents)
