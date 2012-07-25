@@ -4,9 +4,9 @@ gem 'jbundler'
 gem 'rails', '3.2.6'
 gem 'jquery-rails'
 gem 'jbuilder'
+gem 'neo4j', "~> 2.0"
 
 platforms :jruby do
-  # gem 'activerecord-jdbc-adapter', :require => false
   gem 'neo4j', "~> 2.0"
 end
 
