@@ -10,6 +10,7 @@ describe "/api/v1/participants", :type => :api do
         url = "api/v1/participants.json"
         seed = double(:seed, :link => link, :id => 1, :user_id => 111)
         Seed.stub(:find).and_return(seed)
+        seed.stub(:helper?).and_return(false)
         participant = double(:participant, :user_id => 111)
         Participant.stub(:create_with_origin).and_return(participant)
         participant.stub(:origin_link).and_return(link)

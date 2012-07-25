@@ -22,3 +22,4 @@ db/messages.log
 db/nioneo_logical.log.2
 db/nioneo_logical.log.active
 db/tm_tx_log.1
+.jbundler

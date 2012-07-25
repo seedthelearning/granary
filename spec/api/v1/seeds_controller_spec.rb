@@ -13,6 +13,7 @@ describe "/api/v1/seeds", :type => :api do
         seed = double(:seed, :id => 1, :link => link, :user_id => 100)
         Seed.stub(:plant).and_return(seed)
         seed.stub(:pledge).and_return(donation)
+        seed.stub(:children_count).and_return(0)
         post "api/v1/seeds.json", :body => { :amount_cents => amount }
       end
 
@@ -50,6 +51,7 @@ describe "/api/v1/seeds", :type => :api do
         seed = double(:seed, :id => 1, :link => link, :user_id => 100)
         Seed.stub(:reseed).and_return(seed)
         seed.stub(:pledge).and_return(donation)
+        seed.stub(:children_count).and_return(0)
         post "api/v1/seeds.json", { :link => link, :amount_cents => amount }
       end
 
@@ -85,6 +87,8 @@ describe "/api/v1/seeds", :type => :api do
         before(:each) do
           Seed.stub(:find).and_return(seed)
           seed.stub(:id).and_return(1)
+          seed.stub(:children_count).and_return(0)
+          seed.stub(:total_donated).and_return(0)
           get url
         end
 
@@ -124,6 +128,8 @@ describe "/api/v1/seeds", :type => :api do
         Seed.stub(:find).and_return(seed)
         seed.stub(:id).and_return(1)
         seed.stub(:pledge).and_return(donation)
+        seed.stub(:children_count).and_return(0)
+        seed.stub(:total_donated).and_return(0)
         get url
       end
 
@@ -147,6 +153,11 @@ describe "/api/v1/seeds", :type => :api do
   end
 
   describe "#index" do
+    before(:each) do
+      Seed.any_instance.stub(:children_count).and_return(0)
+      Seed.any_instance.stub(:total_donated).and_return(0)
+    end
+
     context "there are seeds" do
       context "there are no donations" do
         let(:seeds) { [ FactoryGirl.build(:seed, :link => "http://link1.com"),

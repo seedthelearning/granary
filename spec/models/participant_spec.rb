@@ -25,11 +25,6 @@ describe "Participant" do
         participant = Participant.create_with_origin(seed, 111)
         participant.origin.should eq(seed)
       end
-
-      it "connects seed and participant via helper" do
-        participant = Participant.create_with_origin(seed, 111)
-        seed.helpers.include?(participant).should be_true
-      end
   	end
   end
 end
