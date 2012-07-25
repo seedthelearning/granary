@@ -4,6 +4,11 @@ Granary requires JRuby 1.6.7 be installed on your machine. We recommend that you
 
     rvm install jruby
 
+Set jruby to 1.9 mode
+
+    vim ~/.bash_profile
+    export JRUBY_OPTS=--1.9
+
 Install the bundle
 
     bundle install
