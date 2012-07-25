@@ -1,3 +1,5 @@
+#comment to trigger commenting on code
+
 class Seed < Neo4j::Rails::Model
   property  :link
   property  :created_at
