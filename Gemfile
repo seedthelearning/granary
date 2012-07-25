@@ -7,6 +7,7 @@ gem 'jbuilder'
 gem 'neo4j', "~> 2.0"
 gem 'therubyrhino'
 gem 'puma'
+gem 'yard'
 
 platforms :jruby do
   gem 'neo4j', "~> 2.0"

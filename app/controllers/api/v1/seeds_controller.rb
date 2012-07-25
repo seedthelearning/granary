@@ -1,5 +1,6 @@
 class Api::V1::SeedsController < ApplicationController
 
+  # @param (*params) expects link, amount_cents, and user_id
   def create
     link = params[:link]
     cents = params[:amount_cents]
