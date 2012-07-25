@@ -5,6 +5,22 @@ describe "Seed" do
   let(:amount) { 10000 }
   let(:user_id) { 100 }
   
+  describe "#children_count" do
+    context "given a valid seed with helpers" do
+      it "returns the correct number of children" do
+        seed = Seed.create
+        expect { Participant.create_with_origin(seed, 1) }.to change{ seed.children_count}.from(0).to(1)
+      end
+    end
+
+    context "given a valid seed with no helpers" do
+      it "returns 0" do
+        seed = Seed.create
+        seed.children_count.should eq(0)
+      end
+    end
+  end
+
   describe "#reseed" do
     context "given donation information" do
       it "the created seed is connected to another seed" do

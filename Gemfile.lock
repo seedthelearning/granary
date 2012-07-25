@@ -47,7 +47,6 @@ GEM
     factory_girl_rails (3.5.0)
       factory_girl (~> 3.5.0)
       railties (>= 3.0.0)
-    ffi (1.1.0)
     ffi (1.1.0-java)
     guard (1.2.3)
       listen (>= 0.4.2)
@@ -95,6 +94,8 @@ GEM
       neo4j-core (= 2.0.1)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    puma (1.5.0-java)
+      rack (~> 1.2)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -157,10 +158,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    trinidad (1.4.0)
-      jruby-rack (>= 1.1.7)
-      trinidad_jars (>= 1.0.5)
-    trinidad_jars (1.0.5)
     tzinfo (0.3.33)
     uglifier (1.2.6)
       execjs (>= 0.3.0)
@@ -183,11 +180,11 @@ DEPENDENCIES
   jbundler
   jquery-rails
   neo4j (~> 2.0)
+  puma
   rack-test
   rails (= 3.2.6)
   rspec-rails
   sass-rails (~> 3.2.3)
   therubyrhino
-  trinidad
   uglifier (>= 1.0.3)
   warbler
