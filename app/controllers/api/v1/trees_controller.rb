@@ -1,5 +1,6 @@
 class Api::V1::TreesController < ApplicationController
 
+  # Utilizes jRuby find method to show Seed by ID
   def show
     @seed = Seed.find(:link => params["id"])
     if @seed

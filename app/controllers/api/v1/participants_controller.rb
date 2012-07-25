@@ -1,5 +1,6 @@
 class Api::V1::ParticipantsController < ApplicationController
 
+  # @param expects link and user_id
 	def create
     link = params[:link]
     origin = Seed.find(:link => link)

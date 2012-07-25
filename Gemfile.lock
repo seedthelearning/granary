@@ -95,6 +95,10 @@ GEM
       neo4j-core (= 2.0.1)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    puma (1.5.0)
+      rack (~> 1.2)
+    puma (1.5.0-java)
+      rack (~> 1.2)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -157,10 +161,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    trinidad (1.4.0)
-      jruby-rack (>= 1.1.7)
-      trinidad_jars (>= 1.0.5)
-    trinidad_jars (1.0.5)
     tzinfo (0.3.33)
     uglifier (1.2.6)
       execjs (>= 0.3.0)
@@ -170,6 +170,7 @@ GEM
       jruby-rack (>= 1.0.0)
       rake (>= 0.8.7)
       rubyzip (>= 0.9.4)
+    yard (0.8.2.1)
 
 PLATFORMS
   java
@@ -183,11 +184,12 @@ DEPENDENCIES
   jbundler
   jquery-rails
   neo4j (~> 2.0)
+  puma
   rack-test
   rails (= 3.2.6)
   rspec-rails
   sass-rails (~> 3.2.3)
   therubyrhino
-  trinidad
   uglifier (>= 1.0.3)
   warbler
+  yard
