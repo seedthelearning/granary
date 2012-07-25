@@ -5,6 +5,7 @@ gem 'rails', '3.2.6'
 gem 'jquery-rails'
 gem 'jbuilder'
 gem 'neo4j', "~> 2.0"
+gem 'therubyracer'
 
 platforms :jruby do
   gem 'neo4j', "~> 2.0"
