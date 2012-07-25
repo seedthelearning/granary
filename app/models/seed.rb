@@ -96,5 +96,4 @@ class Seed < Neo4j::Rails::Model
                                :payout_cents => 100)
   end
 
-private
 end
