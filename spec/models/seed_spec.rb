@@ -5,6 +5,13 @@ describe "Seed" do
   let(:amount) { 10000 }
   let(:user_id) { 100 }
   
+  describe ".reseed" do
+    it "reseeds the seed" do
+      seed = Seed.plant(1, 3000)
+      expect { Seed.reseed(2, seed.link, 3000) }.to change{ seed.outgoing(:reseeds).count }.from(0).to(1)
+    end
+  end
+
   describe "#helper?" do
     let(:seed) { Seed.plant(1, 3000) }
 
