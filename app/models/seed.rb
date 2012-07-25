@@ -72,8 +72,7 @@ class Seed < Neo4j::Rails::Model
   def self.plant(user_id, amount_cents)
     unique_url = generate_link
     seed = Seed.create(:user_id => user_id, :link => unique_url)
-    donation = create_donation(amount_cents)
-    seed.pledge = donation
+    seed.pledge = create_donation(amount_cents)
     seed.save
     seed
   end
