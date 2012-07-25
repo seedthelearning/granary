@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 describe "/api/v1/trees", :type => :api do
-	describe "#show" do
+  describe "#show" do
     context "seed has no children" do
-      it "returns a json seed" do
-
-      end
       it "returns json with no children" do
         seed = double(:seed, :id => 1, :link => "http://foo.com", :reseeds => [])
         seed.stub(:tree).and_return({:children => {}})
@@ -33,11 +30,12 @@ describe "/api/v1/trees", :type => :api do
     end
 
     context "given a bad seed" do
-    	before(:each) do
+      before(:each) do
         get "api/v1/trees/adf.json"
       end
+
       it "returns a 404 not found" do
-      	last_response.status.should eq(404)
+        last_response.status.should eq(404)
       end
 
       it "returns an error message" do
