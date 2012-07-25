@@ -61,7 +61,7 @@ class Seed < Neo4j::Rails::Model
   end
 
   def helper?(user_id)
-    outgoing(:helpers).depth(1).raw.paths.depth_first(:pre).each do |path|
+    outgoing(:helpers).depth(:all).raw.paths.depth_first(:pre).each do |path|
       if path.end_node[:user_id] == user_id
         return true
       end
