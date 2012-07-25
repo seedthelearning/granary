@@ -69,5 +69,7 @@ module Neo4jrails
       g.orm             :neo4j
       g.test_framework  :rspec, :fixture => false
     end
+
+    config.assets.initialize_on_precompile = false
   end
 end

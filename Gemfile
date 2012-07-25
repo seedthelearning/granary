@@ -6,7 +6,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 gem 'neo4j', "~> 2.0"
 gem 'therubyrhino'
-gem 'trinidad'
+gem 'puma'
 
 platforms :jruby do
   gem 'neo4j', "~> 2.0"

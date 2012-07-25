@@ -67,4 +67,7 @@ Neo4jrails::Application.configure do
   
   STDOUT.sync = true
   config.logger = Logger.new(STDOUT)
+
+  config.serve_static_assets = true
+  config.threadsafe!
 end
