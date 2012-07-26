@@ -57,7 +57,11 @@ class Seed < Neo4j::Rails::Model
   end
 
   def total_donated
-    children_count * pledge.payout_cents
+    amounts = outgoing(:reseeds).depth(:all).collect do |seed|
+      seed.pledge.amount_cents.to_i
+    end
+
+    amounts.push(self.pledge.amount_cents.to_i).inject(&:+)
   end
 
   def helper?(user_id)
