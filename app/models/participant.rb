@@ -4,9 +4,9 @@ class Participant < Neo4j::Rails::Model
   property :user_id
 
   has_one(:origin)
-  
+
   def origin_link
-  	origin.link
+    origin.link
   end
 
   def self.create_with_origin(origin, user_id)
