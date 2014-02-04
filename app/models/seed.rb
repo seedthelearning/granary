@@ -1,3 +1,5 @@
+#comment to trigger commenting on code
+
 class Seed < Neo4j::Rails::Model
   property  :link
   property  :created_at
@@ -76,8 +78,7 @@ class Seed < Neo4j::Rails::Model
   def self.plant(user_id, amount_cents)
     unique_url = generate_link
     seed = Seed.create(:user_id => user_id, :link => unique_url)
-    donation = create_donation(amount_cents)
-    seed.pledge = donation
+    seed.pledge = create_donation(amount_cents)
     seed.save
     seed
   end
